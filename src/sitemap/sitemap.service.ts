@@ -29,14 +29,23 @@ export class SitemapService {
 
     const links = [
       { url: '/', changefreq: 'monthly', priority: 1.0 },
-      { url: '/articles', changefreq: 'weekly', priority: 0.9 },
+      { url: '/bloq', changefreq: 'weekly', priority: 0.9 },
+      { url: '/ourServices', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/pintura', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/limpieza', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/albanileria', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/electricidad', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/plomeria', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/refrigeracion', changefreq: 'monthly', priority: 0.7 },
+      { url: '/ourServices/tasacion', changefreq: 'monthly', priority: 0.7 },
+      { url: '/contact', changefreq: 'yearly', priority: 0.5 },
       ...articles.map(article => ({
         url: `/articles/${article.id}/${this.generateSlug(article.title)}`,
         lastmod: article.date,
-        changefreq: 'monthly',
+        changefreq: 'weekly',
         priority: 0.8,
       })),
-    ]
+    ];
     const stream = new SitemapStream({ hostname: 'https://HouseCrafting.es' });
     const xml = await streamToPromise(Readable.from(links).pipe(stream));
     return xml.toString();
