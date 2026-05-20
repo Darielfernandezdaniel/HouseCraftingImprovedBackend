@@ -6,7 +6,7 @@ import type { Response } from 'express';
 export class SitemapController {
   constructor(private readonly sitemapService: SitemapService) {}
 
-  @Get('sitemap.xml')
+  @Get()
   async getSitemap(@Res() res:Response){
     const xml = await this.sitemapService.generateSitemap();
     res.header('Content-Type', 'application/xml');
