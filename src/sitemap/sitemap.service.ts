@@ -40,7 +40,7 @@ export class SitemapService {
       { url: '/ourServices/tasacion', changefreq: 'monthly', priority: 0.7 },
       { url: '/contact', changefreq: 'yearly', priority: 0.5 },
       ...articles.map(article => ({
-        url: `/articles/${article.id}/${this.generateSlug(article.title)}`,
+        url: `/articles/${this.generateSlug(article.title)}`,
         lastmod: article.date,
         changefreq: 'weekly',
         priority: 0.8,

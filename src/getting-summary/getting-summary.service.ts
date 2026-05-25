@@ -42,4 +42,30 @@ export class GettingSummaryService {
       .take(itemsPerPage)
       .getMany();
   }
+
+  async findBySlug(slug: string): Promise<GettingSummary> {
+    const articles = await this.summaryRepository.find();
+    const found = articles.find(a => this.generateSlug(a.title) === slug);
+    if (!found) throw new NotFoundException(`Artículo con slug ${slug} no encontrado`);
+  return found;
+}
+
+  async findByService(service: string): Promise<GettingSummary[]> {
+    return this.summaryRepository.find({
+      where: { service },
+      order: { id: 'DESC' },
+      take: 10,
+    });
+  }
+
+private generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .trim();
+}
 }

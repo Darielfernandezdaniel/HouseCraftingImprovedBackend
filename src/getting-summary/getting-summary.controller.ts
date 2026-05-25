@@ -24,8 +24,16 @@ export class GettingSummaryController {
     return this.summaryService.findPaginated(page);
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-  return this.summaryService.findOne(id);
+  @Get(':idOrSlug')
+    findOne(@Param('idOrSlug') idOrSlug: string) {
+    const id = parseInt(idOrSlug);
+    return isNaN(id) 
+      ? this.summaryService.findBySlug(idOrSlug)
+      : this.summaryService.findOne(id);
   }
+
+  @Get('by-service/:service')
+    findByService(@Param('service') service: string) {
+      return this.summaryService.findByService(service);
+    }
 }
