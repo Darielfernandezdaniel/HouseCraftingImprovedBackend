@@ -21,7 +21,7 @@ async function bootstrap() {
 }));
   
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://housecrafting.es'],
+    origin: ['http://localhost:4200', 'https://house-crafting-improved.vercel.app'],
     methods: ['POST', 'GET'],
     credentials: true,
   });
